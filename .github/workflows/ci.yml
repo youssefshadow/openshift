@@ -1,0 +1,22 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Login to Harbor
+        run: echo "${{ secrets.HARBOR_PASSWORD }}" | docker login harbor.kakor.ovh -u ${{ secrets.HARBOR_USERNAME }} --password-stdin
+
+      - name: Build Docker image
+        run: docker build -t harbor.kakor.ovh/${{ secrets.HARBOR_USERNAME }}/tp-app:latest .
+
+      - name: Push Docker image
+        run: docker push harbor.kakor.ovh/${{ secrets.HARBOR_USERNAME }}/tp-app:latest

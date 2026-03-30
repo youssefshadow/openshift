@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tp-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tp-app
+  template:
+    metadata:
+      labels:
+        app: tp-app
+    spec:
+      containers:
+        - name: tp-app
+          image: harbor.kakor.ovh/ipi-gp-3/tp-app:latest
+          ports:
+            - containerPort: 5000
