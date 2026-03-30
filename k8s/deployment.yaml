@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
         - name: tp-app
-          image: harbor.kakor.ovh/ipi-gp-3/tp-app:latest
+          image: harbor.kakor.ovh/ipim2il/groupe-3/tp-app:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
